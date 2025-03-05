@@ -9,10 +9,10 @@ import ${packageName}.common.ResultUtils;
 import ${packageName}.constant.UserConstant;
 import ${packageName}.exception.BusinessException;
 import ${packageName}.exception.ThrowUtils;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}AddRequest;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}EditRequest;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}QueryRequest;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}UpdateRequest;
+import ${packageName}.model.dto.${dtoPackageName}.${upperDataKey}AddRequest;
+import ${packageName}.model.dto.${dtoPackageName}.${upperDataKey}EditRequest;
+import ${packageName}.model.dto.${dtoPackageName}.${upperDataKey}QueryRequest;
+import ${packageName}.model.dto.${dtoPackageName}.${upperDataKey}UpdateRequest;
 import ${packageName}.model.entity.${upperDataKey};
 import ${packageName}.model.entity.User;
 import ${packageName}.model.vo.${upperDataKey}VO;
@@ -28,8 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ${dataName}接口
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://www.code-nav.cn">编程导航学习圈</a>
+ * @author <a href="https://github.com/iKeepRun">zack</a>
  */
 @RestController
 @RequestMapping("/${dataKey}")

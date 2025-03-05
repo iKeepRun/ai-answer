@@ -15,7 +15,7 @@ import java.io.Writer;
 /**
  * 代码生成器
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @author <a href="https://github.com/iKeepRun">zack</a>
  * @from <a href="https://www.code-nav.cn">编程导航学习圈</a>
  */
 public class CodeGenerator {
@@ -30,9 +30,10 @@ public class CodeGenerator {
     public static void main(String[] args) throws TemplateException, IOException {
         // 指定生成参数
         String packageName = "com.zack.aianswer";
-        String dataName = "用户评论";
-        String dataKey = "userComment";
-        String upperDataKey = "UserComment";
+        String dataName = "用户答题记录";
+        String dataKey = "userAnswer";
+        String upperDataKey = "UserAnswer";
+        String dtoPackageName="useranswer";
 
         // 封装生成参数
         Map<String, Object> dataModel = new HashMap<>();
@@ -40,6 +41,7 @@ public class CodeGenerator {
         dataModel.put("dataName", dataName);
         dataModel.put("dataKey", dataKey);
         dataModel.put("upperDataKey", upperDataKey);
+        dataModel.put("dtoPackageName", dtoPackageName);
 
         // 生成路径默认值
         String projectPath = System.getProperty("user.dir");
@@ -104,6 +106,7 @@ public class CodeGenerator {
 
         // 指定模板文件所在的路径
         File templateDir = new File(inputPath).getParentFile();
+//        System.out.println("模板文件路径：" + templateDir.getAbsolutePath());
         configuration.setDirectoryForTemplateLoading(templateDir);
 
         // 设置模板文件使用的字符集

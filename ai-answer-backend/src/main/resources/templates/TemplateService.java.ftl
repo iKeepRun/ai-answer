@@ -3,7 +3,7 @@ package ${packageName}.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}QueryRequest;
+import ${packageName}.model.dto.${dtoPackageName}.${upperDataKey}QueryRequest;
 import ${packageName}.model.entity.${upperDataKey};
 import ${packageName}.model.vo.${upperDataKey}VO;
 
@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * ${dataName}服务
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://www.code-nav.cn">编程导航学习圈</a>
+ * @author <a href="https://github.com/iKeepRun">zack</a>
  */
 public interface ${upperDataKey}Service extends IService<${upperDataKey}> {
 

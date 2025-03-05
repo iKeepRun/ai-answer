@@ -8,7 +8,7 @@ import ${packageName}.common.ErrorCode;
 import ${packageName}.constant.CommonConstant;
 import ${packageName}.exception.ThrowUtils;
 import ${packageName}.mapper.${upperDataKey}Mapper;
-import ${packageName}.model.dto.${dataKey}.${upperDataKey}QueryRequest;
+import ${packageName}.model.dto.${dtoPackageName}.${upperDataKey}QueryRequest;
 import ${packageName}.model.entity.${upperDataKey};
 import ${packageName}.model.entity.${upperDataKey}Favour;
 import ${packageName}.model.entity.${upperDataKey}Thumb;
@@ -34,8 +34,7 @@ import java.util.stream.Collectors;
 /**
  * ${dataName}服务实现
  *
- * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
- * @from <a href="https://www.code-nav.cn">编程导航学习圈</a>
+ * @author <a href="https://github.com/iKeepRun">zack</a>
  */
 @Service
 @Slf4j
