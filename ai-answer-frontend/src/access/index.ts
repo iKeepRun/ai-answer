@@ -5,8 +5,7 @@ import checkAccess from '@/access/checkAccess'
 
 // 进入页面前，进行权限校验
 router.beforeEach(async (to, from, next) => {
-  console.log('to path', to.fullPath)
-  console.log('beforeEach')
+  console.log('beforeeach to', to)
   // 获取当前登录用户
   const userStore = loginUserStore()
   let loginUser = userStore.loginUser
@@ -22,6 +21,7 @@ router.beforeEach(async (to, from, next) => {
   // 当前页面需要的权限
   const needAccess = (to.meta?.access as string) ?? ACCESS_ENUM.GUEST
   console.log('needAccess', needAccess)
+  console.log('loginUser', loginUser)
   // 要跳转的页面必须登录
   if (needAccess !== ACCESS_ENUM.GUEST) {
     // 如果没登录，跳转到登录页面

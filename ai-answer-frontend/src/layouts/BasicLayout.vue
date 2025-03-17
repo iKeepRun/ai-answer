@@ -19,6 +19,11 @@ import GlobalHeader from '@/components/GlobalHeader.vue'
 <style scoped>
 .ant-layout-content {
   background: linear-gradient(to right, #fefefe, #fff);
+  padding: 20px;
+  /* box-sizing: border-box;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto 28px; */
 }
 .ant-layout-footer {
   background: #efefef;

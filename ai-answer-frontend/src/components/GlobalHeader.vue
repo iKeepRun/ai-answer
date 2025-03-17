@@ -16,7 +16,7 @@
         </a-menu-item>
 
         <a-menu-item
-          v-for="item in visbleRoutes"
+          v-for="item in visibleRoutes"
           :key="item.path"
           :style="{ marginLeft: '50px', fontSize: '18px' }"
           >{{ item.name }}</a-menu-item
@@ -24,10 +24,10 @@
       </a-menu>
     </a-col>
     <a-col flex="100px">
-      <div v-if="loginUser.id">
+      <div v-if="userStore.loginUser.id">
         <a-dropdown>
           <a-space>
-            <a> {{ loginUser.userName }} <DownOutlined /></a>
+            <a> {{ userStore.loginUser.userName }} <DownOutlined /></a>
           </a-space>
           <template #overlay>
             <a-menu>
@@ -37,46 +37,25 @@
         </a-dropdown>
       </div>
       <div v-else>
-        <a-button type="primary" shape="round" @click="$router.push('/user/login')">登录</a-button>
+        <a-button type="primary" href="/user/login">登录</a-button>
       </div>
     </a-col>
   </a-row>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { routes } from '../router/routes.ts'
+import { routes } from '@/router/routes.ts'
 import { loginUserStore } from '@/store/userStore.ts'
 import { userLogoutUsingPost } from '@/api/userController.ts'
 import { message } from 'ant-design-vue'
 import { DownOutlined } from '@ant-design/icons-vue'
 import checkAccess from '@/access/checkAccess.ts'
 
-const { loginUser } = loginUserStore()
-console.log('loginUserxxx', loginUser)
-
-// const parentRoutes = routes.filter((item) => item.name === '基础')
-// const visbleRoutes = parentRoutes[0]?.children?.filter((item) => item.meta?.isVisible) || []
-
-const visbleParentRoutes = routes.filter((parentItem) => {
-  const visibleChildren = parentItem.children?.filter((childItem) => {
-    if (!childItem.meta?.isVisible) {
-      return false
-    }
-    //校验权限
-    if (!checkAccess(childItem.meta?.access as string, loginUser)) {
-      return false
-    }
-    return true
-  })
-
-  return visibleChildren && visibleChildren.length > 0
-})
-
-const visbleRoutes = visbleParentRoutes.flatMap((item) => {
-  return item.children || []
-})
+console.log('fffff', routes)
+const userStore = loginUserStore()
+console.log('loginUserxxx', userStore.loginUser)
 
 const router = useRouter()
 const route = useRoute()
@@ -85,6 +64,30 @@ const selectedKeys = ref<string[]>([route.path])
 router.afterEach((to) => {
   selectedKeys.value = [to.path]
 })
+// console.log('loginUser', userStore.loginUser)
+
+const visibleRoutes = computed(() => {
+  console.log('当前得路由数组', routes)
+  return routes
+    .filter((route) => {
+      // const newRoute = { ...route }
+      if (route.children) {
+        route.children = route.children.filter((child) => {
+          return (
+            checkAccess(child.meta?.access as string, userStore.loginUser) &&
+            child.meta?.isVisible !== false
+          )
+        })
+      }
+      return true
+    })
+    .flatMap((route) => {
+      console.log('route', route)
+      return route.children || []
+    })
+})
+
+console.log('visibleRoutes', visibleRoutes.value)
 
 const menuClickHandler = ({ key }: { key: string }) => {
   router.push(key)
@@ -93,8 +96,8 @@ const menuClickHandler = ({ key }: { key: string }) => {
 const handleLogout = async () => {
   const res = await userLogoutUsingPost()
   if (res.data.data) {
-    message.success(res.data.message)
-    // loginUserStore().$reset()
+    message.success('退出登录成功')
+    await userStore.fetchUser()
     router.push({
       path: '/user/login',
       replace: true,

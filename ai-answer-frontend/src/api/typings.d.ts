@@ -53,7 +53,7 @@ declare namespace API {
   }
 
   type AppReviewRequest = {
-    appid?: string
+    appid?: number
     message?: string
     reviewStatus?: number
   }
