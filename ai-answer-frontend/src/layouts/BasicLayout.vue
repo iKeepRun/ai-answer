@@ -19,7 +19,7 @@ import GlobalHeader from '@/components/GlobalHeader.vue'
 <style scoped>
 .ant-layout-content {
   background: linear-gradient(to right, #fefefe, #fff);
-  padding: 20px;
+  padding: 20px 20px 48px 20px;
   /* box-sizing: border-box;
   max-width: 1200px;
   width: 100%;

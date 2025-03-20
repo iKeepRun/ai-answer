@@ -6,10 +6,11 @@
       </template>
       <a-card-meta :title="item.appName" :description="item.appDesc"> </a-card-meta>
 
-      <div style="margin-top: 10px">
-        <img :src="item.appIcon" style="width: 16px; height: 16px; margin-right: 8px" />
+      <div style="margin-top: 10px; display: flex; align-items: center">
+        <a-avatar :src="item.appIcon" :size="16" style="margin-right: 8px" />
+        <!-- <img :src="item.appIcon" style="width: 16px; height: 16px; margin-right: 8px" /> -->
         {{ item.user?.userName ?? '' }}
-        <ShareAltOutlined style="" />
+        <ShareAltOutlined style="margin-left: 160px" />
       </div>
     </a-card>
   </div>

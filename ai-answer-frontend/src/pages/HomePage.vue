@@ -53,10 +53,6 @@ const pagination = computed(() => {
 
 const getAppList = async () => {
   const res = await listAppVoByPageUsingPost(queryParams)
-  console.log('接口数据', res.data.data)
-  console.log('接口数据 总数', res.data.data?.total)
-  console.log('接口数据 总数类型', typeof res.data.data?.total)
-  console.log('接口数据 当前类型', typeof res.data.data?.current)
   if (res.data.data) {
     total.value = res.data.data.total ?? 0
     data.value = res.data.data.records ?? []
@@ -64,7 +60,6 @@ const getAppList = async () => {
 }
 
 const handleTableChange = (page: number, pageSize: number) => {
-  // console.log('mknnjknkjn', page, pageSize)
   queryParams.current = page
   queryParams.pageSize = pageSize
   console.log('分页参数', queryParams)

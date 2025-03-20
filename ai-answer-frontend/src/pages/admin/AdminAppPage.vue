@@ -110,6 +110,7 @@ import {
   REVIEW_STATUS_MAP,
   SCORING_STRATEGY_MAP,
 } from '@/constant/App'
+import API from '@/api'
 
 const total = ref(0)
 const data = ref<API.App[]>([])

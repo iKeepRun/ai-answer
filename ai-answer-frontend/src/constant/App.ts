@@ -4,8 +4,8 @@ export const APP_TYPE_ENUM = {
 }
 
 export const APP_TYPE_MAP = {
-  '0': '得分类',
-  '1': '测评类',
+  0: '得分类',
+  1: '测评类',
 }
 
 export const REVIEW_STATUS_ENUM = {
@@ -14,9 +14,9 @@ export const REVIEW_STATUS_ENUM = {
   REJECT: 2,
 }
 export const REVIEW_STATUS_MAP = {
-  '0': '待审核',
-  '1': '通过',
-  '2': '拒绝',
+  0: '待审核',
+  1: '通过',
+  2: '拒绝',
 }
 
 export const SCORING_STRATEGY_ENUM = {
@@ -25,6 +25,6 @@ export const SCORING_STRATEGY_ENUM = {
 }
 
 export const SCORING_STRATEGY_MAP = {
-  '0': '自定义',
-  '1': 'AI',
+  0: '自定义',
+  1: 'AI',
 }
