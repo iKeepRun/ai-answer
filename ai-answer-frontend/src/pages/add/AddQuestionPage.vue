@@ -107,6 +107,8 @@ const loadAppInfo = async () => {
     appInfo.value = res.data.data
   }
 }
+
+//获取题目
 const loadData = async () => {
   if (!queryAppParams.id) {
     return

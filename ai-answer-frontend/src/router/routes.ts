@@ -16,6 +16,7 @@ import AddAppPage from '@/pages/add/AddAppPage.vue'
 import AddQuestionPage from '@/pages/add/AddQuestionPage.vue'
 import AddScoringResultPage from '@/pages/add/AddScoringResultPage.vue'
 import AddTest from '@/pages/add/AddTest.vue'
+import DoAnswerPage from '@/pages/answer/DoAnswerPage.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -60,6 +61,12 @@ export const routes: Array<RouteRecordRaw> = [
         name: '创建评分',
         component: AddScoringResultPage,
         props: true,
+        meta: { isVisible: false },
+      },
+      {
+        path: '/answer/do/:appId',
+        name: '开始答题',
+        component: DoAnswerPage,
         meta: { isVisible: false },
       },
       {

@@ -13,7 +13,7 @@
             {{ data.user?.userName }}
           </p>
           <p>创建时间: {{ dayjs(data.createTime).format('YYYY-MM-DD HH:mm:ss') }}</p>
-          <a-button type="primary">开始答题</a-button>
+          <a-button type="primary" @click="handleStartAnswer">开始答题</a-button>
           <a-button style="background: #f2f4f5; margin-left: 10px">分享应用</a-button>
 
           <a-button
@@ -89,6 +89,10 @@ const handleSetQuestion = () => {
 
 const handleSetScoringResult = () => {
   router.push('/add/scoring_result/' + queryId.id)
+}
+
+const handleStartAnswer = () => {
+  router.push('/answer/do/' + queryId.id)
 }
 </script>
 

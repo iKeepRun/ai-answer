@@ -66,38 +66,10 @@ import { onMounted, reactive, ref, computed } from 'vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import message from 'ant-design-vue/es/message'
 import dayjs from 'dayjs'
-const columns = [
-  {
-    title: 'id',
-    dataIndex: 'id',
-  },
-  {
-    title: '题目',
-    dataIndex: 'questionContent',
-  },
-  {
-    title: '应用id',
-    dataIndex: 'appId',
-  },
-  {
-    title: '创建用户id',
-    dataIndex: 'userId',
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createTime',
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updateTime',
-  },
-  {
-    title: '操作',
-    key: 'action',
-  },
-]
+
 const total = ref(0)
 const data = ref<API.Question[]>([])
+
 const queryParams = reactive<API.QuestionQueryRequest>({
   current: 1,
   pageSize: 10,
@@ -149,6 +121,37 @@ const handleDeleteClick = async (id: number) => {
 onMounted(() => {
   getQuestionList()
 })
+
+const columns = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+  },
+  {
+    title: '题目',
+    dataIndex: 'questionContent',
+  },
+  {
+    title: '应用id',
+    dataIndex: 'appId',
+  },
+  {
+    title: '创建用户id',
+    dataIndex: 'userId',
+  },
+  {
+    title: '创建时间',
+    dataIndex: 'createTime',
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'updateTime',
+  },
+  {
+    title: '操作',
+    key: 'action',
+  },
+]
 </script>
 
 <style scoped>
