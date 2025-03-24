@@ -17,6 +17,8 @@ import AddQuestionPage from '@/pages/add/AddQuestionPage.vue'
 import AddScoringResultPage from '@/pages/add/AddScoringResultPage.vue'
 import AddTest from '@/pages/add/AddTest.vue'
 import DoAnswerPage from '@/pages/answer/DoAnswerPage.vue'
+import AnswerResultPage from '@/pages/answer/AnswerResultPage.vue'
+import MyAnswerPage from '@/pages/answer/MyAnswerPage.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -34,12 +36,12 @@ export const routes: Array<RouteRecordRaw> = [
         path: '/add/app',
         name: '创建应用',
         component: AddAppPage,
-        meta: { isVisible: true },
+        meta: { isVisible: true, access: ACCESS_ENUM.USER },
       },
       {
         path: '/add/app/:id',
         props: true,
-        name: '创建应用',
+        name: '编辑应用',
         component: AddAppPage,
         meta: { isVisible: false },
       },
@@ -67,6 +69,18 @@ export const routes: Array<RouteRecordRaw> = [
         path: '/answer/do/:appId',
         name: '开始答题',
         component: DoAnswerPage,
+        meta: { isVisible: false },
+      },
+      {
+        path: '/answer/result/:id',
+        name: '答题结果',
+        component: AnswerResultPage,
+        meta: { isVisible: false },
+      },
+      {
+        path: '/answer/my',
+        name: '我的答题',
+        component: MyAnswerPage,
         meta: { isVisible: false },
       },
       {

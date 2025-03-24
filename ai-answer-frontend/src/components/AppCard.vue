@@ -10,7 +10,7 @@
         <a-avatar :src="item.appIcon" :size="16" style="margin-right: 8px" />
         <!-- <img :src="item.appIcon" style="width: 16px; height: 16px; margin-right: 8px" /> -->
         {{ item.user?.userName ?? '' }}
-        <ShareAltOutlined style="margin-left: 160px" />
+        <ShareAltOutlined style="margin-left: 180px" />
       </div>
     </a-card>
   </div>

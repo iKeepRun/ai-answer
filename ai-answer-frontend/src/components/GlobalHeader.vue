@@ -1,11 +1,11 @@
 <template>
-  <a-row justify="space-between" align="middle" :wrap="false">
+  <a-row justify="space-between" align="middle">
     <a-col flex="auto">
       <a-menu
         :selectedKeys="selectedKeys"
         theme="light"
         mode="horizontal"
-        :style="{ lineHeight: '64px' }"
+        :style="{ lineHeight: '64px', maxWidth: '900px' }"
         @click="menuClickHandler"
       >
         <a-menu-item key="0" :style="{ marginLeft: '100px' }">
@@ -21,6 +21,7 @@
           :style="{ marginLeft: '50px', fontSize: '18px' }"
           >{{ item.name }}</a-menu-item
         >
+        <template #overflowedIndicator><EllipsisOutlined style="margin-left: 8px" /></template>
       </a-menu>
     </a-col>
     <a-col flex="100px">
@@ -50,7 +51,7 @@ import { routes } from '@/router/routes.ts'
 import { loginUserStore } from '@/store/userStore.ts'
 import { userLogoutUsingPost } from '@/api/userController.ts'
 import { message } from 'ant-design-vue'
-import { DownOutlined } from '@ant-design/icons-vue'
+import { DownOutlined, EllipsisOutlined } from '@ant-design/icons-vue'
 import checkAccess from '@/access/checkAccess.ts'
 
 console.log('fffff', routes)

@@ -30,6 +30,7 @@
         v-if="data.length - 1 === questionIndex && currentOption"
         type="primary"
         size="small"
+        @click="doSubmit"
         >查看结果</a-button
       >
     </a-space>
@@ -58,10 +59,12 @@
 
 <script setup lang="ts">
 import { listQuestionVoByPageUsingPost } from '@/api/questionController'
+import { addUserAnswerUsingPost } from '@/api/userAnswerController'
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 //当前得选项
 const currentOption = ref('')
 //所选答案得集合
@@ -84,7 +87,6 @@ const loading = ref(true)
 
 //当前题目
 const currentQuestion = ref<API.QuestionContentDTO>({})
-console.log('ddddd', currentQuestion.value.options)
 
 // 格式化 options 为 a-radio-group 所需的格式
 const formattedOptions = computed(() => {
@@ -118,7 +120,19 @@ watchEffect(() => {
 const doChange = () => {
   answerList.value[questionIndex.value] = currentOption.value
 }
+const doSubmit = async () => {
+  if (!appId || answerList.value.length <= 0) {
+    return
+  }
+  const res = await addUserAnswerUsingPost({
+    appId,
+    choices: answerList.value,
+  })
 
+  if (res.data.data && res.data.code === 0) {
+    router.push(`/answer/result/${res.data.data}`)
+  }
+}
 onMounted(() => {
   getQuestionList()
 })
