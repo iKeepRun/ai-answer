@@ -65,9 +65,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         }
         // 修改数据时，有参数则校验
         //补充校验规则
-        if (StringUtils.isNotBlank(questionContent)) {
-            ThrowUtils.throwIf(questionContent.length() > 80, ErrorCode.PARAMS_ERROR, "标题过长");
-        }
+//        if (StringUtils.isNotBlank(questionContent)) {
+//            ThrowUtils.throwIf(questionContent.length() > 80, ErrorCode.PARAMS_ERROR, "标题过长");
+//        }
     }
 
     /**
@@ -91,7 +91,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         String sortField = questionQueryRequest.getSortField();
         String sortOrder = questionQueryRequest.getSortOrder();
 
-        queryWrapper.like("questionContent", questionContent);
+        queryWrapper.like(ObjectUtils.isNotEmpty(questionContent),"questionContent", questionContent);
         // 精确查询
         queryWrapper.ne(ObjectUtils.isNotEmpty(notId), "id", notId);
         queryWrapper.eq(ObjectUtils.isNotEmpty(id), "id", id);

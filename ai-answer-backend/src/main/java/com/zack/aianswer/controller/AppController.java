@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 /**
  * 应用接口
@@ -243,8 +244,8 @@ public class AppController {
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Boolean>  reviewApp(@RequestBody AppReviewRequest appReviewRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(appReviewRequest == null, ErrorCode.PARAMS_ERROR);
-        String appid = appReviewRequest.getAppid();
-        ThrowUtils.throwIf(StrUtil.isBlank(appid), ErrorCode.PARAMS_ERROR);
+        Long appid = appReviewRequest.getAppid();
+        ThrowUtils.throwIf(appid==null, ErrorCode.PARAMS_ERROR);
 
         App app = appService.getById(appid);
         ThrowUtils.throwIf(app == null, ErrorCode.NOT_FOUND_ERROR,"应用不存在");
@@ -255,6 +256,7 @@ public class AppController {
         app.setReviewerId(userService.getLoginUser(request).getId());
         app.setReviewStatus(appReviewRequest.getReviewStatus());
         app.setReviewMessage(appReviewRequest.getMessage());
+        app.setReviewTime(new Date());
         boolean update = appService.updateById(app);
         ThrowUtils.throwIf(!update, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);

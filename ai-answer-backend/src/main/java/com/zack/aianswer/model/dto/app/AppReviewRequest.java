@@ -9,7 +9,7 @@ public class AppReviewRequest implements Serializable {
 
     private static final long serialVersionUID = 5913982265231078868L;
 
-    private String appid;
+    private Long appid;
 
     private Integer reviewStatus;
 

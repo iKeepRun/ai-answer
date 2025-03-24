@@ -136,7 +136,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
         // 精确查询
         queryWrapper.ne(ObjectUtils.isNotEmpty(appIcon), "appIcon", appIcon);
         queryWrapper.eq(ObjectUtils.isNotEmpty(id), "id", id);
-        queryWrapper.eq(ObjectUtils.isNotEmpty(notId), "notId", notId);
+        queryWrapper.ne(ObjectUtils.isNotEmpty(notId), "id", notId);
         queryWrapper.eq(ObjectUtils.isNotEmpty(userId), "userId", userId);
         queryWrapper.eq(ObjectUtils.isNotEmpty(appType), "appType", appType);
         queryWrapper.eq(ObjectUtils.isNotEmpty(reviewStatus), "reviewStatus", reviewStatus);
@@ -191,9 +191,7 @@ public class AppServiceImpl extends ServiceImpl<AppMapper, App> implements AppSe
             return appVOPage;
         }
         // 对象列表 => 封装对象列表
-        List<AppVO> appVOList = appList.stream().map(app -> {
-            return AppVO.objToVo(app);
-        }).collect(Collectors.toList());
+        List<AppVO> appVOList = appList.stream().map(app -> AppVO.objToVo(app)).collect(Collectors.toList());
 
         // todo 可以根据需要为封装对象补充值，不需要的内容可以删除
         // region 可选

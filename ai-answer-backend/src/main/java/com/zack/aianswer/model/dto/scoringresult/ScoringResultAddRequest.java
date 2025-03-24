@@ -28,7 +28,7 @@ public class ScoringResultAddRequest implements Serializable {
     private String resultPicture;
 
     /**
-     * 结果属性集合 JSON，如 [I,S,T,J]
+         * 结果属性集合 JSON，如 [I,S,T,J]
      */
     private List<String> resultProp;
 

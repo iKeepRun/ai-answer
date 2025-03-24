@@ -16,10 +16,11 @@ public class QuestionContentDTO {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public class Option {
+    public static class Option {
         private String result;
         private String value;
         private String key;
+
     }
 }
 
