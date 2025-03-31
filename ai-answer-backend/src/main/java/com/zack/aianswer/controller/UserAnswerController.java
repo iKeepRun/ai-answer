@@ -1,7 +1,12 @@
 package com.zack.aianswer.controller;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.digest.MD5;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.google.common.graph.Graph;
 import com.zack.aianswer.annotation.AuthCheck;
 import com.zack.aianswer.common.BaseResponse;
 import com.zack.aianswer.common.DeleteRequest;
@@ -29,6 +34,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -75,8 +81,8 @@ public class UserAnswerController {
 
         Long appId = userAnswerAddRequest.getAppId();
         App app = appService.getById(appId);
-        if(!ReviewStatusEnum.PASS.equals(ReviewStatusEnum.getEnumByValue(app.getReviewStatus()))){
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR,"该应用正在审核中，无法答题");
+        if (!ReviewStatusEnum.PASS.equals(ReviewStatusEnum.getEnumByValue(app.getReviewStatus()))) {
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "该应用正在审核中，无法答题");
         }
         // 写入数据库
         boolean result = userAnswerService.save(userAnswer);
@@ -188,7 +194,7 @@ public class UserAnswerController {
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<UserAnswerVO>> listUserAnswerVOByPage(@RequestBody UserAnswerQueryRequest userAnswerQueryRequest,
-                                                               HttpServletRequest request) {
+                                                                   HttpServletRequest request) {
         long current = userAnswerQueryRequest.getCurrent();
         long size = userAnswerQueryRequest.getPageSize();
         // 限制爬虫
@@ -209,7 +215,7 @@ public class UserAnswerController {
      */
     @PostMapping("/my/list/page/vo")
     public BaseResponse<Page<UserAnswerVO>> listMyUserAnswerVOByPage(@RequestBody UserAnswerQueryRequest userAnswerQueryRequest,
-                                                                 HttpServletRequest request) {
+                                                                     HttpServletRequest request) {
         ThrowUtils.throwIf(userAnswerQueryRequest == null, ErrorCode.PARAMS_ERROR);
         // 补充查询条件，只查询当前登录用户的数据
         User loginUser = userService.getLoginUser(request);
@@ -260,4 +266,7 @@ public class UserAnswerController {
     }
 
     // endregion
+
+
+
 }
