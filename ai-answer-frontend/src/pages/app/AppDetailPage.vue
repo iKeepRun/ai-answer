@@ -92,6 +92,13 @@ const handleSetScoringResult = () => {
 }
 
 const handleStartAnswer = () => {
+  //查看应用是否过审
+  if (data.reviewStatus !== 1) {
+    message.error('应用未过审')
+    return
+  }
+
+  //查看是否已经答过题
   router.push('/answer/do/' + queryId.id)
 }
 </script>

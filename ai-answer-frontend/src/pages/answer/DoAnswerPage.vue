@@ -1,5 +1,9 @@
 <template>
   <div class="doAnswerPage">
+    <h1>
+      <strong>{{ appInfo.appName }}</strong>
+    </h1>
+    <p>{{ appInfo.appDesc }}</p>
     <a-space style="margin-bottom: 10px">
       <a-button
         type="primary"
@@ -58,6 +62,7 @@
 </template>
 
 <script setup lang="ts">
+import { getAppVoByIdUsingGet } from '@/api/appController'
 import { listQuestionVoByPageUsingPost } from '@/api/questionController'
 import { addUserAnswerUsingPost } from '@/api/userAnswerController'
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
@@ -133,8 +138,19 @@ const doSubmit = async () => {
     router.push(`/answer/result/${res.data.data}`)
   }
 }
+
+const appInfo = ref<API.AppVO>({})
+
+const getAppInfo = async () => {
+  const res = await getAppVoByIdUsingGet({ id: appId })
+  if (res.data.code === 0 && res.data.data) {
+    appInfo.value = res.data.data
+  }
+}
+
 onMounted(() => {
   getQuestionList()
+  getAppInfo()
 })
 </script>
 
