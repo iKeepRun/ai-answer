@@ -1,5 +1,6 @@
 package com.zack.aianswer;
 
+<<<<<<< HEAD
 import com.zack.aianswer.manager.AiManager;
 import com.zhipu.oapi.ClientV4;
 import com.zhipu.oapi.Constants;
@@ -25,4 +26,7 @@ public class AiTest {
 //        System.out.println("model output:" + answer);
 
     }
+=======
+public class AiTest {
+>>>>>>> 2b2c7a18520a61c296dce0034fb88bba0b093360
 }

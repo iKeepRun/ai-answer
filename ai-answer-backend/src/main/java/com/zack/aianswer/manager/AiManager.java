@@ -1,5 +1,6 @@
 package com.zack.aianswer.manager;
 
+<<<<<<< HEAD
 import com.zhipu.oapi.ClientV4;
 import com.zhipu.oapi.Constants;
 import com.zhipu.oapi.service.v4.model.*;
@@ -118,4 +119,7 @@ public class AiManager {
     }
 
 
+=======
+public class AiManager {
+>>>>>>> 2b2c7a18520a61c296dce0034fb88bba0b093360
 }

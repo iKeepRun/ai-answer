@@ -1,5 +1,6 @@
 package com.zack.aianswer.constant;
 
+<<<<<<< HEAD
 public interface AiPromptConstant {
     public static  final String AI_SET_QUESTION_PROMPT ="你是一位出题专家，给你以下信息\n" +
             " ```\n" +
@@ -42,4 +43,7 @@ public interface AiPromptConstant {
             "\t\t\t\t\n" +
             "\t\t\t\t\n" +
             "\t\t根据我的答案结合应用描述，根据你的专业性给出精准测试结果\t\t" ;
+=======
+public class AiPromptConstant {
+>>>>>>> 2b2c7a18520a61c296dce0034fb88bba0b093360
 }
