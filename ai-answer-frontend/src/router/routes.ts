@@ -1,7 +1,6 @@
 import HomePage from '../pages/HomePage.vue'
 import LoginPage from '../pages/user/LoginPage.vue'
 import RegisterPage from '../pages/user/RegisterPage.vue'
-import AboutPage from '../pages/AboutPage.vue'
 import type { RouteRecordRaw } from 'vue-router'
 import UserLayout from '@/layouts/UserLayout.vue'
 import BasicLayout from '@/layouts/BasicLayout.vue'
@@ -81,7 +80,7 @@ export const routes: Array<RouteRecordRaw> = [
         path: '/answer/my',
         name: '我的答题',
         component: MyAnswerPage,
-        meta: { isVisible: false },
+        meta: { isVisible: true },
       },
       {
         path: '/admin/user',

@@ -5,13 +5,22 @@
 
     <a-form class="form" @submit="onFinish">
       <a-form-item label="题目列表">
-        <a-button
-          @click="() => addQuestion(questionContent.length)"
-          type="primary"
-          ghost
-          style="margin-bottom: 10px"
-          >底部添加题目</a-button
-        >
+        <a-space>
+          <a-button
+            @click="() => addQuestion(questionContent.length)"
+            type="primary"
+            ghost
+            style="margin-bottom: 10px"
+            >底部添加题目</a-button
+          >
+          <AiGenerateQuesition
+            :appInfo="appInfo || {}"
+            :onSuccess="childBack"
+            :onSSESuccess="childSSEBack"
+            :onSSEFinish="childFinish"
+          />
+        </a-space>
+
         <div v-for="(item, index) in questionContent" :key="index">
           <a-form-item :label="'题目' + (index + 1)">
             <a-space>
@@ -39,9 +48,6 @@
                 <a-button disabled size="small" style="margin-right: 48px; color: black"
                   >选项{{ optionIndex + 1 }}</a-button
                 >
-                <!-- <a-tag :bordered="true" color="#87d068" style="margin-right: 24px; height: 26px"
-                  >选项{{ optionIndex + 1 }}</a-tag
-                > -->
                 <a-space :size="[12, 'small']" wrap>
                   <a-button danger size="small" @click="() => removeOption(index, optionIndex)"
                     >删除</a-button
@@ -91,11 +97,11 @@ import {
 } from '@/api/questionController'
 import { getAppVoByIdUsingGet } from '@/api/appController'
 import { message } from 'ant-design-vue'
+import AiGenerateQuesition from './components/AiGenerateQuesition.vue'
 
 const route = useRoute()
 const router = useRouter()
 const queryAppParams = route.params
-// const questionQueryRequest = ref<API.QuestionQueryRequest>({})
 
 const oldQuestion = ref<API.QuestionVO>({})
 const questionContent = ref<API.QuestionContentDTO[]>([])
@@ -121,13 +127,13 @@ const loadData = async () => {
   if (res.data.data?.records) {
     oldQuestion.value = res.data.data.records[0]
     questionContent.value = oldQuestion.value.questionContent ?? []
-    // questionContent.value = res.data.data.records[0].questionContent ?? []
   }
 }
 
 const addQuestion = (index: number) => {
   questionContent.value.splice(index, 0, { title: '', options: [] })
 }
+
 const removeQuestion = (index: number) => {
   questionContent.value.splice(index, 1)
 }
@@ -178,6 +184,22 @@ const onFinish = async () => {
     message.error('操作失败' + res.data.message)
   }
 }
+
+const childBack = (data: API.QuestionContentDTO[]) => {
+  questionContent.value.splice(questionContent.value.length, 0, ...data)
+}
+
+const childSSEBack = (data: API.QuestionContentDTO) => {
+  questionContent.value = [...questionContent.value, data]
+}
+
+const childFinish = () => {
+  message.success('生成成功')
+}
+// watchEffect(() => {
+//   questionContent.value = oldQuestion.value?.questionContent ?? []
+// })
+
 onMounted(() => {
   loadData()
   loadAppInfo()
@@ -189,6 +211,7 @@ onMounted(() => {
   padding: 0 200px;
   margin: 0 auto;
 }
+
 /* .ant-input {
   width: 1000px;
 } */

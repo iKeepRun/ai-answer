@@ -17,6 +17,21 @@ export async function addQuestionUsingPost(
   })
 }
 
+/** aiCreateQuestion POST /api/question/ai/generate */
+export async function aiCreateQuestionUsingPost(
+  body: API.QuestionAiCreateRequest,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseListQuestionContentDTO_>('/api/question/ai/generate', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
 /** deleteQuestion POST /api/question/delete */
 export async function deleteQuestionUsingPost(
   body: API.DeleteRequest,

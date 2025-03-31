@@ -1,10 +1,10 @@
 import axios from 'axios'
-
+import { BASE_URL } from './config/apiConfig'
 const myAxios = axios.create({
-  baseURL: 'http://localhost:8101',
+  baseURL: BASE_URL,
   // `withCredentials` 表示跨域请求时是否需要使用凭证
   withCredentials: true,
-  timeout: 10000, // default
+  timeout: 60000, // default
 })
 
 // 添加请求拦截器
