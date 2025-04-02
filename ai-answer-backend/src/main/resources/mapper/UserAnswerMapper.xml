@@ -26,4 +26,18 @@
         resultName,resultDesc,resultPicture,resultScore,userId,
         createTime,updateTime,isDelete
     </sql>
+    <select id="countUserByAppId" resultType="com.zack.aianswer.model.dto.app.AppAnswerCountDTO">
+        select appId,count(distinct userId) as answerCount from user_answer group by appId
+           order by answerCount desc
+    </select>
+
+    <select id="answerResultCount" resultType="com.zack.aianswer.model.dto.app.AppAnswerResultCountDTO">
+        select resultName, count(resultName) as resultNameCount
+        from user_answer
+        where appId = #{appId}
+        group by resultName
+        order by resultNameCount desc
+    </select>
+
+
 </mapper>

@@ -1,5 +1,6 @@
 package com.zack.aianswer.controller;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.MD5;
 import cn.hutool.json.JSONUtil;
@@ -92,6 +93,7 @@ public class UserAnswerController {
         //调用评分模块，更新用户回答
         UserAnswer userAnswerNew = scoringStrategyExecutor.doScore(app, choices);
         userAnswerNew.setId(newUserAnswerId);
+        userAnswerNew.setAppId(null);
         userAnswerService.updateById(userAnswerNew);
         return ResultUtils.success(newUserAnswerId);
     }
@@ -267,6 +269,10 @@ public class UserAnswerController {
 
     // endregion
 
+    @GetMapping("/generate/id")
+    public BaseResponse<Long> generateUserAnswerId() {
+        return ResultUtils.success(IdUtil.getSnowflakeNextId());
+    }
 
 
 }

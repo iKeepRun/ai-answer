@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author <a href="https://github.com/iKeepRun">zack</a>
  * 
  */
-// todo 如需开启 Redis，须移除 exclude 中的内容
 @SpringBootApplication
 @MapperScan("com.zack.aianswer.mapper")
 @EnableScheduling

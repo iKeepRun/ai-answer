@@ -39,6 +39,32 @@ spring:
 #    uris: http://localhost:9200
 #    username: root
 #    password: 123456
+  shardingsphere:
+    datasource:
+      names: ai-answer
+      ai-answer:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/ai_answer?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: hcxh8888@@
+#     规则配置
+    rules:
+      sharding:
+#        分片算法配置
+        sharding-algorithms:
+          answer-table-inline:
+            type: inline
+            props:
+              algorithm-expression: user_answer_${appId % 2}
+        tables:
+          user_answer:
+            actual-data-nodes: ai-answer.user_answer_$->{0..1}
+            table-strategy:
+              standard:
+                sharding-column: appId
+                sharding-algorithm-name: answer-table-inline
+
   # 文件上传
   servlet:
     multipart:
