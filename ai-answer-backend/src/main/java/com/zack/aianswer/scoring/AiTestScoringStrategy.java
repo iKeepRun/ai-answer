@@ -53,7 +53,7 @@ public class AiTestScoringStrategy implements ScoringStrategy {
     public UserAnswer doScore(App app, List<String> choices) {
         Question question = questionService.getOne(Wrappers.lambdaQuery(Question.class).eq(Question::getAppId, app.getId()));
         List<QuestionContentDTO> questionContentDTOList = JSONUtil.toList(question.getQuestionContent(), QuestionContentDTO.class);
-
+        // 从缓存中获取值
         String key = createKey(String.valueOf(app.getId()), choices);
         String answer_cache = cache.getIfPresent(key);
         if (StrUtil.isNotBlank(answer_cache)) {
@@ -109,6 +109,7 @@ public class AiTestScoringStrategy implements ScoringStrategy {
             userAnswer.setResultName((String) result.get("resultName"));
             userAnswer.setResultDesc((String) result.get("resultDesc"));
 
+            //添加本地缓存
             cache.put(key, JSONUtil.toJsonStr(userAnswer));
             return userAnswer;
         } catch (Exception e) {
