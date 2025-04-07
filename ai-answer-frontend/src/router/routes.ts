@@ -18,6 +18,7 @@ import AddTest from '@/pages/add/AddTest.vue'
 import DoAnswerPage from '@/pages/answer/DoAnswerPage.vue'
 import AnswerResultPage from '@/pages/answer/AnswerResultPage.vue'
 import MyAnswerPage from '@/pages/answer/MyAnswerPage.vue'
+import AdminAppStatisticPage from '@/pages/admin/AdminAppStatisticPage.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -50,12 +51,6 @@ export const routes: Array<RouteRecordRaw> = [
         component: AddQuestionPage,
         props: true,
         meta: { isVisible: false },
-      },
-      {
-        path: '/add/test',
-        name: '创建测试',
-        component: AddTest,
-        meta: { isVisible: true },
       },
       {
         path: '/add/scoring_result/:id',
@@ -111,6 +106,15 @@ export const routes: Array<RouteRecordRaw> = [
         name: '回答管理',
         component: AdminUserAnswerPage,
         meta: { isVisible: true, access: ACCESS_ENUM.ADMIN },
+      },
+      {
+        path: '/admin/statistic',
+        name: '应用统计',
+        component: AdminAppStatisticPage,
+        meta: {
+          isVisible: true,
+          access: ACCESS_ENUM.ADMIN,
+        },
       },
       {
         path: '/app/detail/:id',

@@ -36,7 +36,12 @@ import { getUserAnswerVoByIdUsingGet } from '@/api/userAnswerController'
 import { ref, onMounted } from 'vue'
 import { APP_TYPE_MAP, SCORING_STRATEGY_MAP } from '@/constant/App'
 const route = useRoute()
-const answerId = Number(route.params.id)
+console.log('路由参数', route.params.id)
+
+// const answerId = Number(route.params.id)
+const answerIdParam = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id
+
+const answerId = BigInt(answerIdParam)
 
 const userAnswerVO = ref<API.UserAnswerVO>()
 const loadData = async () => {

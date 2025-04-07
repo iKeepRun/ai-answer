@@ -10,6 +10,7 @@ import * as postFavourController from './postFavourController'
 import * as postThumbController from './postThumbController'
 import * as questionController from './questionController'
 import * as scoringResultController from './scoringResultController'
+import * as appStatisticController from './appStatisticController'
 import * as userController from './userController'
 import * as userAnswerController from './userAnswerController'
 export default {
@@ -21,6 +22,7 @@ export default {
   postThumbController,
   questionController,
   scoringResultController,
+  appStatisticController,
   userController,
   userAnswerController,
 }

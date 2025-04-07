@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { getAppVoByIdUsingGet } from '@/api/appController'
 import { listQuestionVoByPageUsingPost } from '@/api/questionController'
-import { addUserAnswerUsingPost } from '@/api/userAnswerController'
+import { addUserAnswerUsingPost, generateUserAnswerIdUsingGet } from '@/api/userAnswerController'
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -122,14 +122,28 @@ watchEffect(() => {
   currentQuestion.value = data.value[questionIndex.value]
 })
 
+const snow_id = ref()
+const getAddId = async () => {
+  const res = await generateUserAnswerIdUsingGet()
+  if (res.data.code === 0 && res.data.data) {
+    snow_id.value = res.data.data
+    console.log('Generated snow_id:', snow_id.value) // 添加日志
+  }
+}
+
 const doChange = () => {
   answerList.value[questionIndex.value] = currentOption.value
 }
+
 const doSubmit = async () => {
   if (!appId || answerList.value.length <= 0) {
     return
   }
+  await getAddId()
+
+  //提交答案
   const res = await addUserAnswerUsingPost({
+    id: snow_id.value,
     appId,
     choices: answerList.value,
   })

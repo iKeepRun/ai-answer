@@ -31,6 +31,7 @@ import { listAppVoByPageUsingPost } from '@/api/appController'
 import { onMounted, reactive, ref, computed } from 'vue'
 import AppCard from '@/components/AppCard.vue'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import ShareModel from '@/components/ShareModel.vue'
 
 const total = ref(0)
 
